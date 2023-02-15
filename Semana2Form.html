@@ -13,38 +13,42 @@
     </a>
 </header>
 
+<nav>
+  <a href="./Semana2Home.html">Página Inicial</a>
+  <a href="./Semana2Form.html">Formulário</a>
+</nav><br><br>
+
 <main>
     <h2>Envia Propostas de Performance Artística</h2>
     <form>
-        <label for="title"> Título: </label><br>
-        <input type="text" id="title" name="title" required><br>
-        <label for="desc"> Descrição: </label><br>
-        <textarea id=desc name="desc" rows="10" cols="30" placeholder="Breve Descrição" required></textarea><br>
-         <label for="name"> Nome: </label><br>
-        <input type="text" id="name" name="name" required><br>
-        <label for="num"> Número: </label><br>
-        <input type="number" id="num" name="num" required><br>
-        <label for="phone">Telemóvel: </label><br>
-        <input type="tel" id="phone" name="phone" pattern="[0-9]{9}" required><br>
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br>
-        <label for="hour">Horário:</label><br>
-        <select id="hour" name="hour">
+	    <label for="title">Título:</label><br>
+	    <input type="text" id="title" name="title" required><br>
+	    <label for="desc">Descrição:</label><br>
+	    <textarea id=desc name="desc" rows="10" cols="30" placeholder="Breve Descrição" required></textarea><br>
+	    <label for="name">Nome:</label><br>
+	    <input type="text" id="name" name="name" required><br>
+	    <label for="birthDate">Data de Nascimento</label><br>
+	    <input type="date" id="birthDate" name="birthDate" required></input><br>
+	    <label for="num">Número:</label><br>
+	    <input type="number" id="num" name="num" required><br>
+	    <label for="phone">Telemóvel:</label><br>
+	    <input type="tel" id="phone" name="phone" pattern="[0-9]{9}" required><br>
+	    <label for="email">Email:</label><br>
+	    <input type="email" id="email" name="email" required><br>
+	    <label for="hour">Horário:</label><br>
+	    <select id="hour" name="hour">
             <option value="first">14h00-15h00</option>
             <option value="second">15h00-16h00</option>
             <option value="third">16h00-17h00</option>
             <option value="fourth">17h00-18h00</option>
-        </select><br><br>
-        <label for="submit">(Todos os campos são obrigatórios)</label><br><br>
-        <input type="submit" id="submit" value="Submeter">
-    </form><br>
+	    </select><br><br>
+	<label for="site">Site Pessoal:</label><br>
+	<input type="url" id="site" name="site"></input><br><br>
+	<input type="submit" id="submit" value="Submeter"><br>
+    </form>
 
 </main>
 
-<nav>
-  <a href="home">Página Inicial</a>
-  <a href="form">Formulário</a>
-</nav><br><br>
 <footer>
     <p>Grupo LEI-PL-8 © Exercício Semana 2, Desenvolvimento para A Internet e Aplicações Móveis 2023</p>
 </footer>
