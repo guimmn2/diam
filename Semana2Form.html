@@ -16,7 +16,7 @@
 <nav>
   <a href="./Semana2Home.html">Página Inicial</a>
   <a href="./Semana2Form.html">Formulário</a>
-</nav><br><br>
+</nav>
 
 <main>
     <h2>Envia Propostas de Performance Artística</h2>
@@ -25,6 +25,14 @@
 	    <input type="text" id="title" name="title" required><br>
 	    <label for="desc">Descrição:</label><br>
 	    <textarea id=desc name="desc" rows="10" cols="30" placeholder="Breve Descrição" required></textarea><br>
+	    <label for="act">Tipo de Actuação</label><br>
+	    <input type="text" list="acts" name="act" id="act"><br>
+	    <datalist id="acts">
+		    <option value="Comédia">
+		    <option value="Dança">
+		    <option value="Música">
+		    <option value="Badonquices">
+	    </datalist>
 	    <label for="name">Nome:</label><br>
 	    <input type="text" id="name" name="name" required><br>
 	    <label for="birthDate">Data de Nascimento</label><br>
@@ -44,6 +52,8 @@
 	    </select><br><br>
 	<label for="site">Site Pessoal:</label><br>
 	<input type="url" id="site" name="site"></input><br><br>
+	<label for="color">Cor Preferida:</label><br>
+	<input type="color" id="color" name="color"></input><br><br>
 	<input type="submit" id="submit" value="Submeter"><br>
     </form>
 

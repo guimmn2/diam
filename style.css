@@ -21,6 +21,20 @@ nav a:hover {
   background-color: #111;
 }
 
+aside {
+  padding: 15px; 
+  float: right;
+  width: 40%;
+  float: right;
+  padding: 5px;
+  margin: 10px;
+}
+
+p {
+	font-size: 20px;
+	padding: 15px;
+}
+
 form {
   font-family: sans-serif;
   background-color: ivory;
@@ -28,4 +42,29 @@ form {
   border: 2px solid darkslateblue;
   padding: 25px;
   width: 20%;
+}
+
+table {
+	width: 100%;
+	border: 1px solid;
+	text-align: center;
+	padding: 15px;
+
+}
+
+th {
+	font-size: 35px;
+	color: midnightblue;
+	padding-bottom: 15px;
+}
+
+td {
+	font-size: 20px;
+	padding-bottom: 10px;
+}
+
+.title {
+	color: midnightblue;
+	text-align: left;
+	font-size: 75px;
 }
