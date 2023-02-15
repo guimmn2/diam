@@ -20,3 +20,12 @@ nav a {
 nav a:hover {
   background-color: #111;
 }
+
+form {
+  font-family: sans-serif;
+  background-color: ivory;
+  color: darkslateblue;
+  border: 2px solid darkslateblue;
+  padding: 25px;
+  width: 20%;
+}
