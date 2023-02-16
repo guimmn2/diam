@@ -22,8 +22,6 @@ nav a:hover {
 }
 
 aside {
-  padding: 15px; 
-  float: right;
   width: 40%;
   float: right;
   padding: 5px;
@@ -36,12 +34,13 @@ p {
 }
 
 form {
-  font-family: sans-serif;
-  background-color: ivory;
-  color: darkslateblue;
-  border: 2px solid darkslateblue;
-  padding: 25px;
-  width: 20%;
+    margin-left: 50px;
+    font-family: sans-serif;
+    background-color: ivory;
+    color: darkslateblue;
+    border: 2px solid darkslateblue;
+    padding: 25px;
+    width: 20%;
 }
 
 table {
@@ -68,3 +67,42 @@ td {
 	text-align: left;
 	font-size: 75px;
 }
+aside {
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: midnightblue;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+aside p {
+    font-family: arial, helvetica, sans-serif;
+    color: #ffffff;
+    font-size: 30px;
+}
+
+aside a {
+    padding: 6px 8px 30px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #ffffff;
+    display: block;
+}
+
+aside a:hover{
+    background-color: #111
+}
+
+header, main, nav, footer {
+    margin-right: 200px;
+}
+
+footer{
+    width:100%;
+    background-color: #afafaf;
+}
+
+
