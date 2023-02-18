@@ -37,13 +37,11 @@ p {
 }
 
 form {
-    margin-left: 50px;
-    font-family: sans-serif;
-    background-color: ivory;
-    color: darkslateblue;
-    border: 2px solid darkslateblue;
-    padding: 25px;
-    width: 20%;
+    display: inline-block;
+}
+
+body {
+    text-align: center;
 }
 
 table {
@@ -70,6 +68,22 @@ td {
 	text-align: left;
 	font-size: 75px;
 }
+
+section a:link,section a:visited {
+  background-color: white;
+  color: black;
+  border: 2px solid midnightblue;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+section a:hover,section a:active {
+  background-color: midnightblue;
+  color: white;
+}
+
 aside {
     width: 160px;
     position: fixed;
@@ -99,13 +113,61 @@ aside a:hover{
     background-color: #111
 }
 
-header, main, nav, footer {
+.marginright{
     margin-right: 200px;
 }
 
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=date], input[type=date], input[type=email], input[type=tel], input[type=number] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="color"] {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  height: 2em;
+  padding: 0;
+  width: 10em;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: midnightblue;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #111;
+}
+
 footer{
+    text-align: center;
     width:100%;
-    background-color: #afafaf;
+    background-color: #eee;
 }
 
 

@@ -5,7 +5,7 @@
     <title>Semana2</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
+<body>
 <header>
     <a href="https://www.iscte-iul.pt/" target="blank">
         <img src="https://www.iscte-iul.pt/assets/files/2020/11/20/1605875888912_rgb_iscte_pt_horizontal_positive__2_.png"
@@ -21,30 +21,21 @@
 </nav>
 
 <main>
-    <h2>Envia Propostas de Performance Artística</h2>
-    <form action="Semana2Home.html">
-	    <label for="title">Título:</label><br>
-	    <input type="text" id="title" name="title" required><br>
-	    <label for="desc">Descrição:</label><br>
-	    <textarea id=desc name="desc" rows="10" cols="30" placeholder="Breve Descrição" required></textarea><br>
-	    <label for="act">Tipo de Actuação</label><br>
-	    <input type="text" list="acts" name="act" id="act"><br>
+    <h1>Envia Propostas de Performance Artística</h1>
+    <form class="formulario" action="Semana2Home.html">
+	    <input type="text" id="title" name="title" placeholder="Título" required><br>
+	    <input type="text" list="acts" name="act" id="act" placeholder="Tipo de Actuação">
 	    <datalist id="acts">
 		    <option value="Comédia">
 		    <option value="Dança">
 		    <option value="Música">
-		    <option value="Badonquices">
 	    </datalist>
-	    <label for="name">Nome:</label><br>
-	    <input type="text" id="name" name="name" required><br>
+	    <input type="text" id="name" name="name" placeholder="Nome Completo" required><br>
 	    <label for="birthDate">Data de Nascimento</label><br>
 	    <input type="date" id="birthDate" name="birthDate" required><br>
-	    <label for="num">Número:</label><br>
-	    <input type="number" id="num" name="num" required><br>
-	    <label for="phone">Telemóvel:</label><br>
-	    <input type="tel" id="phone" name="phone" pattern="[0-9]{9}" required><br>
-	    <label for="email">Email:</label><br>
-	    <input type="email" id="email" name="email" required><br>
+	    <input type="number" id="num" name="num" placeholder="Número" required>
+	    <input type="tel" id="phone" name="phone" pattern="[0-9]{9}" placeholder="Telemóvel" required>
+	    <input type="email" id="email" name="email" placeholder="Email" required><br>
 	    <label for="hour">Horário:</label><br>
 	    <select id="hour" name="hour">
             <option value="first">14h00-15h00</option>
@@ -54,16 +45,17 @@
 	    </select><br><br>
 	<label for="color">Cor Preferida:</label><br>
 	<input type="color" id="color" name="color"><br><br>
-	<input type="submit" value="Submeter"><br>
+    <textarea id=desc name="desc" rows="10" cols="30" placeholder="Breve Descrição" required></textarea><br>
+	<input type="submit" value="Submeter"><br><br>
     </form>
 
 </main>
 
 <footer>
     <h2> Contactos</h2>
-    <p><strong>Telemóvel:</strong> 900012023</p>
-    <p><strong>Email:</strong> concurso@sapo.pt</p>
-    <p>Grupo LEI-PL-8 © Exercício Semana 2, Desenvolvimento para A Internet e Aplicações Móveis 2023</p>
+    <p><strong>Telemóvel:</strong> 900012023<br>
+    <strong>Email:</strong> concurso@sapo.pt<br>
+    Grupo LEI-PL-8 © Exercício Semana 2, Desenvolvimento para A Internet e Aplicações Móveis 2023</p>
 </footer>
-
+</body>
 </html>
