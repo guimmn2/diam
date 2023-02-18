@@ -1,4 +1,4 @@
-nav {
+nav ul{
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -6,8 +6,11 @@ nav {
   background-color: midnightblue;
 }
 
+nav li {
+    float: left;
+}
 
-nav a {
+nav li a {
   float: left;
   font-family: arial, helvetica, sans-serif;
   display: block;
@@ -17,7 +20,7 @@ nav a {
   text-decoration: none;
 }
 
-nav a:hover {
+nav li a:hover {
   background-color: #111;
 }
 
