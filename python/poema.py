@@ -28,5 +28,6 @@ verse_list.append("Por isso eu fiz um samba bem pra frente")
 verse_list.append("Dizendo realmente o que é que eu acho")
 verse_list.append("Isso me deixa triste e cabisbaixo")
 
-for verse in verse_list:
+#print dos ultimos 2 versos adicionados
+for verse in verse_list[-2:]:
     print(verse)
