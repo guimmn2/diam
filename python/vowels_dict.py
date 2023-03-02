@@ -11,12 +11,21 @@ for char in parsed_poem:
     if char in vowels_dict.keys():
         vowels_dict[char] += 1
 
-print("ocorrências de cada vogal:")
 print("...")
+print("ocorrências de cada vogal:")
 print(vowels_dict)
 print("...")
-sorted_vowels_dict = sorted(vowels_dict.items(), key=lambda x:x[1])
 
+#vogal mais utilizada/vogais empatadas
 max_value = max(vowels_dict.values())
+tied_vowels = []
+for pair in vowels_dict.items():
+    if pair[1] == max_value:
+        tied_vowels.append(pair[0])
+if len(tied_vowels) > 1:
+    print("há mais vencedoras: " + str(tied_vowels))
+else:
+    print("vencedora: " + str(tied_vowels))
+
 
 #print(max(vowels_dict, key=vowels_dict.get))
