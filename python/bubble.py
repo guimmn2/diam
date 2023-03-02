@@ -45,5 +45,5 @@ end_2 = time.time()
 print("list ordenada: " + str(l2)) 
 print(". . .")
 
-print("tempo de execução para o 1º algoritmo: " + str(end_1 - start_1))
-print("tempo de execução para o 2º algoritmo: " + str(end_2 - start_2))
+print("tempo de execução para o algoritmo: " + str(end_1 - start_1))
+print("tempo de execução para o algoritmo com optimização: " + str(end_2 - start_2))
