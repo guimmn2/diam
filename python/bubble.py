@@ -13,10 +13,10 @@ print("começando algoritmo de ordenação")
 
 start = time.time()
 
-while l != sorted(l):
-    for n in range(len(l) - 1):
-        if l[n] > l[n+1]:
-            l[n], l[n+1] = l[n+1], l[n]
+for n in range(len(l) - 1):
+    for k in range(n):
+        if l[k] > l[n+1]:
+            l[k], l[n+1] = l[n+1], l[k]
 
 end = time.time()
 
