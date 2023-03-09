@@ -1,16 +1,6 @@
 import itertools
 from timeit import default_timer as timer
 
-
-# função para ordenar
-def bubble_sort(l):
-    for n in range(len(l)):
-        for k in range(len(l) - n - 1):
-            if l[k] > l[k + 1]:
-                l[k], l[k + 1] = l[k + 1], l[k]
-    return l
-
-
 # strings transponíveis para testar
 str1 = "roma"
 str2 = "amor"
@@ -44,6 +34,16 @@ print(". . .")
 
 
 # Alinea b)
+
+# função para ordenar
+def bubble_sort(l):
+    for n in range(len(l)):
+        for k in range(len(l) - n - 1):
+            if l[k] > l[k + 1]:
+                l[k], l[k + 1] = l[k + 1], l[k]
+    return l
+
+
 def sort_approach(word1, word2):
     aux1 = bubble_sort([*word1.replace(" ", "")])
     aux2 = bubble_sort([*word2.replace(" ", "")])
@@ -111,8 +111,7 @@ print("Strings são transponíveis: " + str(flag) + " - word count approach util
     end - start))
 print(". . .")
 
-#Alínea e)
+# Alínea e)
 
-#A que tem menos passos é a alinea a) none approach. Se forem usadas strings muito pequenas (<4 letras) o brute force acaba por ser o mais rapido,
-# mas para as maiores strings o none approach é o mais rapido
-
+# A que tem menos passos é a alinea a) none approach. Se forem usadas strings muito pequenas (<4 letras) o brute
+# force acaba por ser o mais rapido, mas para as maiores strings o none approach é o mais rapido

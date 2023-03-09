@@ -1,30 +1,37 @@
-# 3.2
 poem = """Eu hoje fiz um samba bem pra frente / Dizendo realmente o que é que eu acho / Eu acho que o meu samba é uma corrente / E coerentemente assino embaixo / Hoje é preciso refletir um pouco / E ver que o samba está tomando jeito / Só mesmo embriagado ou muito louco / Pra contestar e pra botar defeito / Precisa ser muito sincero e claro / Pra confessar que andei sambando errado / Talvez precise até tomar na cara / Pra ver que o samba está bem melhorado / Tem mais é que ser bem cara de tacho / Não ver a multidão sambar contente / Isso me deixa triste e cabisbaixo"""
+
+# 3.1 Strings
+
+# Alinea a)
 
 verse_list = poem.split(" / ")
 
+print("verse 5: " + verse_list[4])
+print("verse 6: " + verse_list[5])
+print(". . .")
+
+# Alinea b)
+
 parsed_poem = poem.replace(" / ", "\n")
 
-vowels_dict = {"a": 0, "e": 0, "i": 0, "o": 0, "u": 0}
+print("Poema formatado:")
+print(parsed_poem)
+print(". . .")
 
-for char in parsed_poem:
-    if char in vowels_dict.keys():
-        vowels_dict[char] += 1
+# Alinea c)
 
-print("...")
-print("ocorrências de cada vogal:")
-print(vowels_dict)
-print("...")
+print("adicionando a estrofe...")
 
-# vogal mais utilizada/vogais empatadas
-max_value = max(vowels_dict.values())
-tied_vowels = []
-for pair in vowels_dict.items():
-    if pair[1] == max_value:
-        tied_vowels.append(pair[0])
-if len(tied_vowels) > 1:
-    print("há mais vencedoras: " + str(tied_vowels))
-else:
-    print("vencedora: " + str(tied_vowels))
+verse_list.append("Por isso eu fiz um samba bem pra frente")
+verse_list.append("Dizendo realmente o que é que eu acho")
+verse_list.append("Isso me deixa triste e cabisbaixo")
+for verse in verse_list:
+    print(verse)
+print(". . .")
 
-# print(max(vowels_dict, key=vowels_dict.get))
+# Alinea d)
+
+# print dos ultimos 2 versos adicionados
+print("Últimos dois versos: ")
+for verse in verse_list[-2:]:
+    print(verse)

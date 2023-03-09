@@ -5,37 +5,26 @@ verse_list = poem.split(" / ")
 
 parsed_poem = poem.replace(" / ", "\n")
 
-vowel_count = 0
-a_count = 0
-e_count = 0
-i_count = 0
-o_count = 0
-u_count = 0
+vowels_dict = {"a": 0, "e": 0, "i": 0, "o": 0, "u": 0}
 
 for char in parsed_poem:
-    if char in ['a', 'e', 'i', 'o', 'u']:
-        vowel_count += 1
-        if char == 'a':
-            a_count += 1
-        elif char == 'e':
-            e_count += 1
-        elif char == 'i':
-            i_count += 1
-        elif char == 'o':
-            o_count += 1
-        else:
-            u_count += 1
+    if char in vowels_dict.keys():
+        vowels_dict[char] += 1
 
-"""
-print("contagem de vogais:")
 print("...")
-print("a: " + str(a_count) + "\n" +"e: " + str(e_count) + "\n" +"i: " + str(i_count) + "\n" +"o: " + str(o_count) + "\n" +"u: " + str(u_count))
+print("Ocorrências de cada vogal:")
+print(vowels_dict)
 print("...")
 
-vowel_counts = sorted([a_count, e_count, i_count, o_count, u_count])
-
-if vowel_counts[-1] == vowel_counts[-2]:
-    print("Há mais vencedores")
+# vogal mais utilizada/vogais empatadas
+max_value = max(vowels_dict.values())
+tied_vowels = []
+for pair in vowels_dict.items():
+    if pair[1] == max_value:
+        tied_vowels.append(pair[0])
+if len(tied_vowels) > 1:
+    print("há mais vencedoras: " + str(tied_vowels))
 else:
-    print("vogal vencedora: " + str(vowel_counts[-1]))
-"""
+    print("vencedora: " + str(tied_vowels))
+
+
