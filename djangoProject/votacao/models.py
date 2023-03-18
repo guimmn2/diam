@@ -1,4 +1,3 @@
-
 from django.db import models
 from django.utils import timezone
 from six import string_types
@@ -15,6 +14,7 @@ class Questao(models.Model):
     def foi_publicada_recentemente(self):
         return self.pub_data >= timezone.now() - datetime.timedelta(days=1)
 
+
 class Opcao(models.Model):
     questao = models.ForeignKey(Questao, on_delete=models.CASCADE)
     opcao_texto = models.CharField(max_length=200)
@@ -22,5 +22,3 @@ class Opcao(models.Model):
 
     def __str__(self):
         return self.opcao_texto
-
-

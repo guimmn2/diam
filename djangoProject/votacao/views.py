@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -38,3 +39,24 @@ def voto(request, questao_id):
         # repetidamente se o utilizador
         # voltar para a página web anterior.
         return HttpResponseRedirect(reverse('votacao:resultados', args=(questao.id,)))
+
+
+def criarquestao(request):
+    return render(request, 'votacao/criarquestao.html')
+
+
+def guardarquestao(request):
+    questao = Questao(questao_texto=request.POST['novaquestao'], pub_data=timezone.now())
+    questao.save()
+    return HttpResponseRedirect(reverse('votacao:index'))
+
+
+def criaropcao(request, questao_id):
+    questao = get_object_or_404(Questao, pk=questao_id)
+    return render(request, 'votacao/criaropcao.html', {'questao': questao})
+
+
+def guardaropcao(request, questao_id):
+    questao = get_object_or_404(Questao, pk=questao_id)
+    questao.opcao_set.create(opcao_texto=request.POST['novaopcao'], votos=0)
+    return HttpResponseRedirect(reverse('votacao:detalhe', args=(questao.id,)))

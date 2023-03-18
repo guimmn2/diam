@@ -1,4 +1,5 @@
-from django.urls import include, path
+from django.urls import path
+
 from . import views
 
 app_name = 'votacao'
@@ -11,4 +12,8 @@ urlpatterns = [
     path('<int:questao_id>/resultados', views.resultados, name='resultados'),
     # ex: votacao/5/voto
     path('<int:questao_id>/voto', views.voto, name='voto'),
+    path('criarquestao', views.criarquestao, name='criarquestao'),
+    path('guardarquestao', views.guardarquestao, name='guardarquestao'),
+    path('<int:questao_id>/criaropcao', views.criaropcao, name="criaropcao"),
+    path('<int:questao_id>/guardaropcao', views.guardaropcao, name="guardaropcao")
 ]
