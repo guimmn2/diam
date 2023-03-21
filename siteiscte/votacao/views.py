@@ -2,7 +2,7 @@ from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-
+from six import string_types
 from .models import Questao, Opcao
 
 

@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils import timezone
-from six import string_types
 import datetime
 
 
