@@ -18,6 +18,8 @@ urlpatterns = [
     path('<int:questao_id>/guardar_opcao', views.guardar_opcao, name="guardaropcao"),
     path('registar', views.registar, name="registar"),
     path('guardar_registo', views.guardar_registo, name="guardar_registo"),
-    path('login', views.login, name="login"),
-    path('autenticacao', views.autenticacao, name="autenticacao")
+    path('login', views.loginview, name="login"),
+    path('autenticacao', views.autenticacao, name="autenticacao"),
+    path('logout', views.logoutview, name="logout"),
+    path('info_pessoal', views.info_pessoal, name="info_pessoal")
 ]

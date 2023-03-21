@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.http import HttpResponseRedirect
@@ -73,6 +73,10 @@ def guardar_registo(request):
     return HttpResponseRedirect(reverse('votacao:index'))
 
 
+def loginview(request):
+    return render(request, 'votacao/loginform.html')
+
+
 def autenticacao(request):
     username = request.POST['username']
     password = request.POST['password']
@@ -82,3 +86,17 @@ def autenticacao(request):
         return HttpResponseRedirect(reverse('votacao:index'))
     else:
         return render(request, 'votacao/loginform.html', {'errormessage': 'Erro de login'})
+
+
+def logoutview(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('votacao:index'))
+
+
+def info_pessoal(request):
+    username = request.user.get_username()
+    email = request.user.email
+    data = request.user.date_joined
+    permissoes = request.user.user_permissions
+    return render(request, 'votacao/info_pessoal.html', {'username': username, 'email': email,
+                                                         'data': data})
