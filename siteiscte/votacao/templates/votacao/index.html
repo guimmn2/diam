@@ -11,6 +11,8 @@
     <p>Nao ha questoes disponiveis.</p>
 {% endif %}
 <br>
-<a href="{%  url 'votacao:criarquestao' %}"> <button type="button">Criar Questão</button> </a>
-<br>
+<a href="{%  url 'votacao:criarquestao' %}"> <button type="button">Criar Questão</button> </a><br><br>
+{% if request.user.is_authenticated %}
+    <p><strong>User logged in: &nbsp; {{ user.get_username }} </strong></p>
+{% endif %}
 <a href="{%  url 'votacao:logout' %}"> <button type="button">Logout</button> </a>

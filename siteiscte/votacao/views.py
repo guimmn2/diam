@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from six import string_types
-from .models import Questao, Opcao
+from .models import Questao, Opcao, Aluno
 
 
 def index(request):
@@ -70,6 +70,7 @@ def registar(request):
 
 def guardar_registo(request):
     user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
+    Aluno.objects.create(user=user, curso=request.POST['curso'])
     return HttpResponseRedirect(reverse('votacao:index'))
 
 
@@ -85,7 +86,7 @@ def autenticacao(request):
         login(request, user)
         return HttpResponseRedirect(reverse('votacao:index'))
     else:
-        return render(request, 'votacao/loginform.html', {'errormessage': 'Erro de login'})
+        return render(request, 'votacao/loginform.html', {'error_message': 'Erro de login'})
 
 
 def logoutview(request):
@@ -94,9 +95,10 @@ def logoutview(request):
 
 
 def info_pessoal(request):
-    username = request.user.get_username()
+    username = request.user.username
     email = request.user.email
     data = request.user.date_joined
-    permissoes = request.user.user_permissions
+    u = Aluno.objects.get(user_id=request.user.id)
+    curso = u.curso
     return render(request, 'votacao/info_pessoal.html', {'username': username, 'email': email,
-                                                         'data': data})
+                                                         'data': data, 'curso': curso})
