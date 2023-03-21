@@ -1,10 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from six import string_types
-from django.db.models import F
 import datetime
 
-# Create your models here.
 
 class Questao(models.Model):
     questao_texto = models.CharField(max_length=200)

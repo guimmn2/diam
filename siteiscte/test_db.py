@@ -1,41 +1,25 @@
-from aifc import Error
-
-from votacao.models import Questao, Opcao
-from django.db import models
-from django.utils import timezone
-from six import string_types
-from django.db.models import F
-import datetime
 import sqlite3
+from votacao.models import Questao, Opcao
 
-## Estabelecer conexão
+try:
+    conn = sqlite3.connect("db.sqlite3")
+    cursor = conn.cursor()
+    cursor.execute("SELECT Sum(votos) FROM votacao_opcao")
+    totalVotos = cursor.fetchone()
+    print("Alinea a) Total de votos: " + str(totalVotos[0]))
+    cursor.execute('''SELECT questao_texto, opcao_texto, MAX(votos)
+                   FROM votacao_questao INNER JOIN votacao_opcao ON votacao_questao.id = questao_id
+                   GROUP BY questao_texto''')
+    result = cursor.fetchall()
+    print("Alinea b)")
+    for res in result:
+        print(res)
 
-conn = sqlite3.connect(r"db.sqlite3")
+    cursor.close()
 
-## Criar cursor (a ponte entre o SQLite e a SQLQuery)
-print("\nAlinea a)")
-with conn:
-
-    ## alínea a)
-    cur = conn.cursor()
-    cur.execute("SELECT SUM(votos) FROM votacao_opcao")
-
-    rows = cur.fetchall()
-
-    for row in rows:
-        print("Numero total de votos: " + str(row[0]))
-
-    ## alínea b)
-    ##cur.execute("SELECT questao_texto, opcao_texto, votos FROM votacao_questao, votacao_opcao WHERE votacao_questao.id=votacao_opcao.questao_id")
-
-    ##cur.execute("SELECT vq.questao_texto, va.opcao_texto, va.votos "
-    ##            "FROM votacao_opcao AS vo JOIN votacao_questao AS vq ON va.questao_id =  vq.id"
-    ##            "WHERE vo.id IN (SELECT id FROM votacao_opcao WHERE )")
-
-    print("\nAlinea b)")
-    cur.execute("SELECT questao_texto, opcao_texto, MAX(votos) FROM votacao_questao, votacao_opcao WHERE votacao_questao.id = questao_id GROUP BY questao_id")
-
-    rows = cur.fetchall()
-
-    for row in rows:
-        print(str(row[0:2]))
+except sqlite3.Error as error:
+    print("Error while connecting to sqlite", error)
+finally:
+    if conn:
+        conn.close()
+        print("The SQLite connection is closed")
