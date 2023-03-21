@@ -1,3 +1,11 @@
+{% if request.user.is_authenticated %}
+    <p><strong>User logged in: &nbsp; {{ user.get_username }} </strong></p>
+    <a href="{%  url 'votacao:logout' %}"> <button type="button">Logout</button> </a>
+    <a href="{%  url 'votacao:info_pessoal' %}"> <button type="button">Account Info</button> </a><br>
+{% else %}
+    <a href="{%  url 'votacao:login' %}"> <button type="button">Login</button> </a><br>
+{% endif %}
+
 {% if latest_question_list %}
 <ul>
     {% for questao in latest_question_list %}
@@ -12,7 +20,3 @@
 {% endif %}
 <br>
 <a href="{%  url 'votacao:criarquestao' %}"> <button type="button">Criar Questão</button> </a><br><br>
-{% if request.user.is_authenticated %}
-    <p><strong>User logged in: &nbsp; {{ user.get_username }} </strong></p>
-{% endif %}
-<a href="{%  url 'votacao:logout' %}"> <button type="button">Logout</button> </a>
