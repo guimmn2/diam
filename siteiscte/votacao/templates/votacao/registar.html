@@ -1,0 +1,17 @@
+<h1>Registar</h1>
+
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="{% url 'votacao:guardar_registo' %}" method="post">
+    {% csrf_token %}
+        <label for="username">Username: </label>
+        <input type="text" name="username" id="username" required = true/><br><br>
+        <label for="Email:">Email:</label>
+        <input type="email" name="email" id="email" required = true/><br><br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required = true/><br><br>
+        <br>
+    <input type="submit" value="Registar"/>
+</form>
