@@ -4,7 +4,7 @@
     <p><strong>{{ error_message }}</strong></p>
 {% endif %}
 
-<form action="{% url 'votacao:guardarquestao' %}" method="post">
+<form action="{% url 'votacao:criarquestao' %}" method="post">
     {% csrf_token %}
         <label for="novaquestao">Texto da nova Questão</label>
         <input type="text" name="novaquestao" id="novaquestao" required = true/>

@@ -4,7 +4,7 @@
     <p><strong>{{ error_message }}</strong></p>
 {% endif %}
 
-<form action="{% url 'votacao:autenticacao' %}" method="post">
+<form action="{% url 'votacao:login' %}" method="post">
     {% csrf_token %}
         <label for="username">Username: </label>
         <input type="text" name="username" id="username" required = true/><br><br>

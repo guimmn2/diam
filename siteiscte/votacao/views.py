@@ -26,7 +26,6 @@ def resultados(request, questao_id):
 
 def voto(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
-    aluno = Aluno.objects.get(user_id=request.user.id)
     if request.user.is_authenticated:
         try:
             opcao_seleccionada = questao.opcao_set.get(pk=request.POST['opcao'])
@@ -35,13 +34,16 @@ def voto(request, questao_id):
             return render(request, 'votacao/detalhe.html',
                           {'questao': questao, 'error_message': "Não escolheu uma opção", })
         else:
-            if aluno.votos == 18:
-                return render(request, 'votacao/detalhe.html',
+            if not request.user.is_superuser:
+                aluno = Aluno.objects.get(user_id=request.user.id)
+                if aluno.votos == 18:
+                    return render(request, 'votacao/detalhe.html',
                               {'questao': questao, 'error_message': "Limite de votos atingido", })
+                aluno.votos += 1
+                aluno.save()
             opcao_seleccionada.votos += 1
             opcao_seleccionada.save()
-            aluno.votos += 1
-            aluno.save()
+
             # Retorne sempre HttpResponseRedirect depois de
             # tratar os dados POST de um form
             # pois isso impede os dados de serem tratados
@@ -54,13 +56,19 @@ def voto(request, questao_id):
 
 
 def criarquestao(request):
-    return render(request, 'votacao/criarquestao.html')
-
-
-def guardarquestao(request):
-    questao = Questao(questao_texto=request.POST['novaquestao'], pub_data=timezone.now())
-    questao.save()
-    return HttpResponseRedirect(reverse('votacao:index'))
+    if request.method == 'POST':
+        try:
+            questao_texto = request.POST.get("novaquestao")
+        except KeyError:
+            return render(request, 'votacao/criarquestao.html')
+        if questao_texto:
+            questao = Questao(questao_texto=questao_texto, pub_data=timezone.now())
+            questao.save()
+            return HttpResponseRedirect(reverse('votacao:detalhe', args=(questao.id,)))
+        else:
+            return render(request, 'votacao/criarquestao.html')
+    else:
+        return render(request, 'votacao/criarquestao.html')
 
 
 def remover_questao(request, questao_id):
@@ -70,38 +78,56 @@ def remover_questao(request, questao_id):
 
 def criaropcao(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
-    return render(request, 'votacao/criaropcao.html', {'questao': questao})
+    if request.method == 'POST':
+        try:
+            if questao:
+                questao.opcao_set.create(opcao_texto=request.POST['novaopcao'], votos=0)
+                return HttpResponseRedirect(reverse('votacao:detalhe', args=(questao.id,)))
+        except KeyError:
+            return render(request, 'votacao/criaropcao.html', {'questao': questao})
+        else:
+            return render(request, 'votacao/criaropcao.html', {'questao': questao})
+    else:
+        return render(request, 'votacao/criaropcao.html', {'questao': questao})
 
 
-def guardaropcao(request, questao_id):
+def remover_opcao(request, opcao_id, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
-    questao.opcao_set.create(opcao_texto=request.POST['novaopcao'], votos=0)
+    opcao = get_object_or_404(Opcao, pk=opcao_id).delete()
     return HttpResponseRedirect(reverse('votacao:detalhe', args=(questao.id,)))
 
 
 def registar(request):
-    return render(request, 'votacao/registar.html')
-
-
-def guardar_registo(request):
-    user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
-    Aluno.objects.create(user=user, curso=request.POST['curso'])
-    return HttpResponseRedirect(reverse('votacao:index'))
+    if request.method == 'POST':
+        try:
+            user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
+            Aluno.objects.create(user=user, curso=request.POST['curso'])
+        except KeyError:
+            return render(request, 'votacao/registar.html', {'error_message': 'Erro de login'})
+        if Aluno:
+            return HttpResponseRedirect(reverse('votacao:index'))
+        else:
+            return render(request, 'votacao/registar.html', {'error_message': 'Erro de login'})
+    else:
+        return render(request, 'votacao/registar.html')
 
 
 def loginview(request):
-    return render(request, 'votacao/loginform.html')
-
-
-def autenticacao(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(username=username, password=password)
-    if user is not None:
-        login(request, user)
-        return HttpResponseRedirect(reverse('votacao:index'))
+    if request.method == 'POST':
+        try:
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+        except KeyError:
+            return render(request, 'votacao/loginform.html', {'error_message': 'Erro de login'})
+        if user:
+            return HttpResponseRedirect(reverse('votacao:index'))
+        else:
+            return render(request, 'votacao/loginform.html', {'error_message': 'Erro de login'})
     else:
-        return render(request, 'votacao/loginform.html', {'error_message': 'Erro de login'})
+        return render(request, 'votacao/loginform.html')
 
 
 def logoutview(request):
