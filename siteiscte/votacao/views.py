@@ -26,21 +26,28 @@ def resultados(request, questao_id):
 
 def voto(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
-    try:
-        opcao_seleccionada = questao.opcao_set.get(pk=request.POST['opcao'])
-    except (KeyError, Opcao.DoesNotExist):
-        # Apresenta de novo o form para votar
-        return render(request, 'votacao/detalhe.html',
-                      {'questao': questao, 'error_message': "Não escolheu uma opção", })
+    aluno = Aluno.objects.get(user_id=request.user.id)
+    if request.user.is_authenticated:
+        try:
+            opcao_seleccionada = questao.opcao_set.get(pk=request.POST['opcao'])
+        except (KeyError, Opcao.DoesNotExist):
+            # Apresenta de novo o form para votar
+            return render(request, 'votacao/detalhe.html',
+                          {'questao': questao, 'error_message': "Não escolheu uma opção", })
+        else:
+            opcao_seleccionada.votos += 1
+            opcao_seleccionada.save()
+            aluno.votos += 1
+            aluno.save()
+            # Retorne sempre HttpResponseRedirect depois de
+            # tratar os dados POST de um form
+            # pois isso impede os dados de serem tratados
+            # repetidamente se o utilizador
+            # voltar para a página web anterior.
+            return HttpResponseRedirect(reverse('votacao:resultados', args=(questao.id,)))
     else:
-        opcao_seleccionada.votos += 1
-        opcao_seleccionada.save()
-        # Retorne sempre HttpResponseRedirect depois de
-        # tratar os dados POST de um form
-        # pois isso impede os dados de serem tratados
-        # repetidamente se o utilizador
-        # voltar para a página web anterior.
-        return HttpResponseRedirect(reverse('votacao:resultados', args=(questao.id,)))
+        return render(request, 'votacao/detalhe.html',
+                      {'questao': questao, 'error_message': "Necessita de login", })
 
 
 def criarquestao(request):
@@ -50,6 +57,11 @@ def criarquestao(request):
 def guardarquestao(request):
     questao = Questao(questao_texto=request.POST['novaquestao'], pub_data=timezone.now())
     questao.save()
+    return HttpResponseRedirect(reverse('votacao:index'))
+
+
+def remover_questao(request, questao_id):
+    get_object_or_404(Questao, pk=questao_id).delete()
     return HttpResponseRedirect(reverse('votacao:index'))
 
 
@@ -100,5 +112,6 @@ def info_pessoal(request):
     data = request.user.date_joined
     u = Aluno.objects.get(user_id=request.user.id)
     curso = u.curso
+    votos = u.votos
     return render(request, 'votacao/info_pessoal.html', {'username': username, 'email': email,
-                                                         'data': data, 'curso': curso})
+                                                         'data': data, 'curso': curso, 'votos': votos})

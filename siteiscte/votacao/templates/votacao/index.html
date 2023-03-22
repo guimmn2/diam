@@ -1,7 +1,9 @@
 {% if request.user.is_authenticated %}
     <p><strong>User logged in: &nbsp; {{ user.get_username }} </strong></p>
     <a href="{%  url 'votacao:logout' %}"> <button type="button">Logout</button> </a>
-    <a href="{%  url 'votacao:info_pessoal' %}"> <button type="button">Account Info</button> </a><br>
+    {% if not request.user.is_superuser %}
+        <a href="{%  url 'votacao:info_pessoal' %}"> <button type="button">Account Info</button> </a><br>
+    {% endif %}
 {% else %}
     <a href="{%  url 'votacao:login' %}"> <button type="button">Login</button> </a><br>
 {% endif %}
@@ -19,4 +21,6 @@
     <p>Nao ha questoes disponiveis.</p>
 {% endif %}
 <br>
+{% if request.user.is_superuser %}
 <a href="{%  url 'votacao:criarquestao' %}"> <button type="button">Criar Questão</button> </a>
+{% endif %}

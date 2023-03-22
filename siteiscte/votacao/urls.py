@@ -19,5 +19,6 @@ urlpatterns = [
     path('login', views.loginview, name="login"),
     path('autenticacao', views.autenticacao, name="autenticacao"),
     path('logout', views.logoutview, name="logout"),
-    path('info_pessoal', views.info_pessoal, name="info_pessoal")
+    path('info_pessoal', views.info_pessoal, name="info_pessoal"),
+    path('<int:questao_id>, remover_questao', views.remover_questao, name="remover_questao"),
 ]
