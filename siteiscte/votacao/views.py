@@ -35,6 +35,9 @@ def voto(request, questao_id):
             return render(request, 'votacao/detalhe.html',
                           {'questao': questao, 'error_message': "Não escolheu uma opção", })
         else:
+            if aluno.votos == 18:
+                return render(request, 'votacao/detalhe.html',
+                              {'questao': questao, 'error_message': "Limite de votos atingido", })
             opcao_seleccionada.votos += 1
             opcao_seleccionada.save()
             aluno.votos += 1
