@@ -4,7 +4,6 @@ from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from six import string_types
 from .models import Questao, Opcao, Aluno
 
 
@@ -30,7 +29,6 @@ def voto(request, questao_id):
         try:
             opcao_seleccionada = questao.opcao_set.get(pk=request.POST['opcao'])
         except (KeyError, Opcao.DoesNotExist):
-            # Apresenta de novo o form para votar
             return render(request, 'votacao/detalhe.html',
                           {'questao': questao, 'error_message': "Não escolheu uma opção", })
         else:
@@ -43,12 +41,6 @@ def voto(request, questao_id):
                 aluno.save()
             opcao_seleccionada.votos += 1
             opcao_seleccionada.save()
-
-            # Retorne sempre HttpResponseRedirect depois de
-            # tratar os dados POST de um form
-            # pois isso impede os dados de serem tratados
-            # repetidamente se o utilizador
-            # voltar para a página web anterior.
             return HttpResponseRedirect(reverse('votacao:resultados', args=(questao.id,)))
     else:
         return render(request, 'votacao/detalhe.html',
@@ -93,7 +85,7 @@ def criaropcao(request, questao_id):
 
 def remover_opcao(request, opcao_id, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
-    opcao = get_object_or_404(Opcao, pk=opcao_id).delete()
+    get_object_or_404(Opcao, pk=opcao_id).delete()
     return HttpResponseRedirect(reverse('votacao:detalhe', args=(questao.id,)))
 
 

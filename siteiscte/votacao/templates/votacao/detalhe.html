@@ -13,11 +13,12 @@
         {% endif %}
         <br />
     {% endfor %}
-    <input type="submit" value="Voto" />
+    <input type="submit" value="Votar" />
 </form>
 <br>
 {% if request.user.is_superuser %}
 <a href="{%  url 'votacao:criaropcao'  questao.id  %}"> <button type="button">Criar Opção</button> </a><br><br>
-<a href="{%  url 'votacao:remover_questao'  questao.id  %}"> <button type="button">Remover Questão</button></a>
+<a href="{%  url 'votacao:remover_questao'  questao.id  %}"> <button type="button">Remover Questão</button></a><br><br>
 {% endif %}
+<a href="{% url 'votacao:index'%}">Voltar início</a>
 

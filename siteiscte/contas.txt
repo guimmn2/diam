@@ -1,0 +1,4 @@
+u: admin pw: test1
+u: Guilherme Santos pw: test1
+u: Guilherme Nunes pw: test1
+u: Lucas Fregona pw: test1
