@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.core.files.storage import FileSystemStorage
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
@@ -36,7 +37,7 @@ def voto(request, questao_id):
                 aluno = Aluno.objects.get(user_id=request.user.id)
                 if aluno.votos == 18:
                     return render(request, 'votacao/detalhe.html',
-                              {'questao': questao, 'error_message': "Limite de votos atingido", })
+                                  {'questao': questao, 'error_message': "Limite de votos atingido", })
                 aluno.votos += 1
                 aluno.save()
             opcao_seleccionada.votos += 1
@@ -136,3 +137,14 @@ def info_pessoal(request):
     votos = u.votos
     return render(request, 'votacao/info_pessoal.html', {'username': username, 'email': email,
                                                          'data': data, 'curso': curso, 'votos': votos})
+
+
+def fazer_upload(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        request.user.aluno.avatar = uploaded_file_url
+        return render(request, 'votacao/info_pessoal.html', {'uploaded_file_url': uploaded_file_url})
+    return render(request, 'votacao/info_pessoal.html')

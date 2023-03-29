@@ -1,7 +1,27 @@
-<h1> Info Pessoal</h1>
+{% extends "./index.html" %}
 
-<p><strong>Username:</strong> &nbsp; {{ username }}</p>
-<p><strong>Email:</strong> &nbsp; {{ email }}</p>
-<p><strong>Data de registo: </strong>&nbsp; {{ data }}</p>
-<p><strong>Curso: </strong>&nbsp; {{ curso }}</p>
-<p><strong>Total Votos: </strong>&nbsp; {{ votos }}</p>
+{% block conteudo %}
+
+    <h1> Info Pessoal</h1>
+
+    <form method="post" enctype="multipart/form-data" action="{% url 'votacao:fazer_upload' %}">
+        {% csrf_token %}
+        <input type="file" name="myfile">
+        <input type="submit" value="Upload">
+    </form>
+
+    {% if uploaded_file_url %}
+        <p>Feito o upload para:
+            <a href="{{ uploaded_file_url }}">
+                {{ uploaded_file_url }}
+            </a>
+        </p>
+    {% endif %}
+
+    <p><strong>Username:</strong> &nbsp; {{ username }}</p>
+    <p><strong>Email:</strong> &nbsp; {{ email }}</p>
+    <p><strong>Data de registo: </strong>&nbsp; {{ data }}</p>
+    <p><strong>Curso: </strong>&nbsp; {{ curso }}</p>
+    <p><strong>Total Votos: </strong>&nbsp; {{ votos }}</p>
+
+{% endblock %}

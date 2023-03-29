@@ -1,27 +1,61 @@
-{% if request.user.is_authenticated %}
-    <p><strong>User logged in: &nbsp; {{ user.get_username }} </strong></p>
-    <a href="{%  url 'votacao:logout' %}"> <button type="button">Logout</button> </a>
-    {% if not request.user.is_superuser %}
-        <a href="{%  url 'votacao:info_pessoal' %}"> <button type="button">Account Info</button> </a><br>
-    {% endif %}
-{% else %}
-    <a href="{%  url 'votacao:login' %}"> <button type="button">Login</button> </a><br><br>
-    <a href="{%  url 'votacao:registar' %}"> <button type="button">Registar</button> </a>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'votacao/style.css' %}">
+</head>
+<body>
+<header>
+    {% block header %}
+        {% if request.user.is_authenticated %}
+            <strong>Bem-vindo: &nbsp; {{ user.get_username }} </strong>
+        {% endif %}
+        <img src="{% static 'votacao/images/iscte.png' %}" width="500" height="200" alt="Banner image">
+        <nav>
+            <ul>
+                <li><a href="{% url 'votacao:index' %}">Página Inicial</a></li>
+                {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'votacao:logout' %}">Logout</a></li>
+                    {% if not request.user.is_superuser %}
+                        <li><a href="{% url 'votacao:info_pessoal' %}">Informação Pessoal </a></li>
+                    {% endif %}
+                {% else %}
+                    <li><a href="{% url 'votacao:login' %}">Login</a></li>
+                    <li><a href="{% url 'votacao:registar' %}">Registar</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        </header>
+    {% endblock %}
+<main>
+    {% block conteudo %}
+        {% if latest_question_list %}
+            <ul>
+                {% for questao in latest_question_list %}
+                    <li>
+                        <a href="{% url 'votacao:detalhe' questao.id %}">{{ questao.questao_texto }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nao ha questoes disponiveis.</p>
+        {% endif %}
+        <br>
+        {% if request.user.is_superuser %}
+            <a href="{% url 'votacao:criarquestao' %}">
+                <button type="button">Criar Questão</button>
+            </a>
+        {% endif %}
+    {% endblock %}
+</main>
+</body>
 
-{% if latest_question_list %}
-<ul>
-    {% for questao in latest_question_list %}
-    <li>
-        <a href= "{% url 'votacao:detalhe' questao.id %}">{{ questao.questao_texto }}</a>
-</li>
-{% endfor %}
+<p>{{ request.user.aluno.avatar }}</p>
+</html>
 
-</ul>
-{% else %}
-    <p>Nao ha questoes disponiveis.</p>
-{% endif %}
-<br>
-{% if request.user.is_superuser %}
-<a href="{%  url 'votacao:criarquestao' %}"> <button type="button">Criar Questão</button> </a>
-{% endif %}
+
+
+
+
+

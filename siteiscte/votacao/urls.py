@@ -20,4 +20,5 @@ urlpatterns = [
     path('info_pessoal', views.info_pessoal, name="info_pessoal"),
     path('<int:questao_id>, remover_questao', views.remover_questao, name="remover_questao"),
     path('<int:opcao_id>, <int:questao_id>, remover_opcao', views.remover_opcao, name="remover_opcao"),
+    path('fazer_upload', views.fazer_upload, name='fazer_upload'),
 ]

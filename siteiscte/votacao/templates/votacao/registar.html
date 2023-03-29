@@ -1,4 +1,8 @@
+{% extends "./index.html" %}
+
+{% block conteudo %}
 <h1>Registar</h1>
+
 
 {% if error_message %}
     <p><strong>{{ error_message }}</strong></p>
@@ -17,3 +21,4 @@
         <br>
     <input type="submit" value="Registar"/>
 </form>
+{% endblock %}
