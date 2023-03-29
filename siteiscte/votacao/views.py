@@ -26,12 +26,6 @@ def detalhe(request, questao_id):
 
 
 @login_required(login_url=reverse_lazy('votacao:login'))
-def resultados(request, questao_id):
-    questao = get_object_or_404(Questao, pk=questao_id)
-    return render(request, 'votacao/resultados.html', {'questao': questao})
-
-
-@login_required(login_url=reverse_lazy('votacao:login'))
 def voto(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
     try:
@@ -49,7 +43,7 @@ def voto(request, questao_id):
             aluno.save()
         opcao_seleccionada.votos += 1
         opcao_seleccionada.save()
-        return HttpResponseRedirect(reverse('votacao:resultados', args=(questao.id,)))
+        return render(request, 'votacao/resultados.html', {'questao': questao})
 
 
 @user_passes_test(check_superuser, login_url=reverse_lazy('votacao:detalhe'))

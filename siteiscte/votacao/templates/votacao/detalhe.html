@@ -13,7 +13,7 @@
         <label for="opcao{{ forloop.counter }}">{{ opcao.opcao_texto }}</label>
         {% if request.user.is_superuser %}
             <a href="{% url 'votacao:remover_opcao'  opcao.id questao.id %}">
-                <button type="button">Remover</button>
+                <button type="button" style="background-color: red;padding: 2px 2px">X</button>
                 <br> </a>
         {% endif %}
         <br/>
@@ -26,7 +26,7 @@
         <button type="button">Criar Opção</button>
     </a><br><br>
     <a href="{% url 'votacao:remover_questao'  questao.id %}">
-        <button type="button">Remover Questão</button>
+        <button type="button" style="background-color: red">Remover Questão</button>
     </a><br><br>
 {% endif %}
 <a href="{% url 'votacao:index' %}">Voltar início</a>

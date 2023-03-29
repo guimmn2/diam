@@ -3,7 +3,7 @@
 {% block conteudo %}
 
 <h1>{{ questao.questao_texto }}</h1>
-<ul>
+<ul style=" text-align: center;list-style-position: inside;">
     {% for opcao in questao.opcao_set.all %}
         <li>{{ opcao.opcao_texto }} {{ opcao.votos }} voto{{ opcao.votos|pluralize }}</li>
 {% endfor %}

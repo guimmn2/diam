@@ -10,10 +10,6 @@ nav ul {
     background-color: midnightblue;
 }
 
-nav li {
-    float: left;
-}
-
 nav li a {
     float: left;
     font-family: arial, helvetica, sans-serif;
@@ -28,13 +24,6 @@ nav li a:hover {
     background-color: #111;
 }
 
-aside {
-    width: 40%;
-    float: right;
-    padding: 5px;
-    margin: 10px;
-}
-
 p {
     font-size: 20px;
     padding: 15px;
@@ -44,76 +33,6 @@ form {
     display: inline-block;
     text-align: center;
 }
-
-table {
-    width: 100%;
-    border: 1px solid;
-    text-align: center;
-    padding: 15px;
-
-}
-
-th {
-    font-size: 35px;
-    color: midnightblue;
-    padding-bottom: 15px;
-}
-
-td {
-    font-size: 20px;
-    padding-bottom: 10px;
-}
-
-.title {
-    color: midnightblue;
-    text-align: left;
-    font-size: 75px;
-}
-
-section a:link, section a:visited {
-    background-color: white;
-    color: black;
-    border: 2px solid midnightblue;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-}
-
-section a:hover, section a:active {
-    background-color: midnightblue;
-    color: white;
-}
-
-aside {
-    width: 160px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    right: 0;
-    background-color: midnightblue;
-    overflow-x: hidden;
-    padding-top: 20px;
-}
-
-aside p {
-    font-family: arial, helvetica, sans-serif;
-    color: #ffffff;
-    font-size: 30px;
-}
-
-aside a {
-    padding: 6px 8px 30px 16px;
-    text-decoration: none;
-    font-size: 20px;
-    color: #ffffff;
-    display: block;
-}
-
-aside a:hover {
-    background-color: #111
-}
-
 
 input[type=text], select, textarea {
     width: 100%;
@@ -125,7 +44,7 @@ input[type=text], select, textarea {
     box-sizing: border-box;
 }
 
-input[type=date], input[type=date], input[type=email], input[type=tel], input[type=number] {
+input[type=date], input[type=date], input[type=email], input[type=tel], input[type=number], input[type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -153,6 +72,20 @@ input[type="color"] {
     padding: 5px;
     width: 100px;
     height: 100px
+}
+
+button {
+    background-color: midnightblue;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #111;
 }
 
 input[type=submit] {

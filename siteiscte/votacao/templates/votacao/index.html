@@ -9,7 +9,11 @@
 <header>
     {% block header %}
         {% if request.user.is_authenticated %}
-            <img class="avatar" src="{{ request.user.aluno.avatar }}">
+            {% if not request.user.is_superuser %}
+                <img class="avatar" src="{{ request.user.aluno.avatar }}">
+            {% else %}
+                <img src="{% static 'votacao/images/giga.png' %}" width="200" height="200">
+            {% endif %}
             <strong>Bem-vindo: &nbsp; {{ user.get_username }} </strong>
         {% endif %}
         <img src="{% static 'votacao/images/iscte.png' %}" width="500" height="200" alt="Banner image">
@@ -31,8 +35,9 @@
     {% endblock %}
 <main>
     {% block conteudo %}
+        <h1 style="text-align: center"> Questões</h1>
         {% if latest_question_list %}
-            <ul>
+            <ul  style=" text-align: center;list-style: none;">
                 {% for questao in latest_question_list %}
                     <li>
                         <a href="{% url 'votacao:detalhe' questao.id %}">{{ questao.questao_texto }}</a>
