@@ -1,11 +1,17 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
-from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.utils import timezone
+
 from .models import Questao, Opcao, Aluno
+
+
+def check_superuser(user):
+    return user.is_superuser
 
 
 def index(request):
@@ -19,35 +25,34 @@ def detalhe(request, questao_id):
     return render(request, 'votacao/detalhe.html', {'questao': questao})
 
 
+@login_required(login_url=reverse_lazy('votacao:login'))
 def resultados(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
     return render(request, 'votacao/resultados.html', {'questao': questao})
 
 
+@login_required(login_url=reverse_lazy('votacao:login'))
 def voto(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
-    if request.user.is_authenticated:
-        try:
-            opcao_seleccionada = questao.opcao_set.get(pk=request.POST['opcao'])
-        except (KeyError, Opcao.DoesNotExist):
-            return render(request, 'votacao/detalhe.html',
-                          {'questao': questao, 'error_message': "Não escolheu uma opção", })
-        else:
-            if not request.user.is_superuser:
-                aluno = Aluno.objects.get(user_id=request.user.id)
-                if aluno.votos == 18:
-                    return render(request, 'votacao/detalhe.html',
-                                  {'questao': questao, 'error_message': "Limite de votos atingido", })
-                aluno.votos += 1
-                aluno.save()
-            opcao_seleccionada.votos += 1
-            opcao_seleccionada.save()
-            return HttpResponseRedirect(reverse('votacao:resultados', args=(questao.id,)))
-    else:
+    try:
+        opcao_seleccionada = questao.opcao_set.get(pk=request.POST['opcao'])
+    except (KeyError, Opcao.DoesNotExist):
         return render(request, 'votacao/detalhe.html',
-                      {'questao': questao, 'error_message': "Necessita de login", })
+                      {'questao': questao, 'error_message': "Não escolheu uma opção", })
+    else:
+        if not request.user.is_superuser:
+            aluno = Aluno.objects.get(user_id=request.user.id)
+            if aluno.votos == 18:
+                return render(request, 'votacao/detalhe.html',
+                              {'questao': questao, 'error_message': "Limite de votos atingido", })
+            aluno.votos += 1
+            aluno.save()
+        opcao_seleccionada.votos += 1
+        opcao_seleccionada.save()
+        return HttpResponseRedirect(reverse('votacao:resultados', args=(questao.id,)))
 
 
+@user_passes_test(check_superuser, login_url=reverse_lazy('votacao:detalhe'))
 def criarquestao(request):
     if request.method == 'POST':
         try:
@@ -64,11 +69,13 @@ def criarquestao(request):
         return render(request, 'votacao/criarquestao.html')
 
 
+@user_passes_test(check_superuser, login_url=reverse_lazy('votacao:detalhe'))
 def remover_questao(request, questao_id):
     get_object_or_404(Questao, pk=questao_id).delete()
     return HttpResponseRedirect(reverse('votacao:index'))
 
 
+@user_passes_test(check_superuser, login_url=reverse_lazy('votacao:detalhe'))
 def criaropcao(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
     if request.method == 'POST':
@@ -84,6 +91,7 @@ def criaropcao(request, questao_id):
         return render(request, 'votacao/criaropcao.html', {'questao': questao})
 
 
+@user_passes_test(check_superuser, login_url=reverse_lazy('votacao:detalhe'))
 def remover_opcao(request, opcao_id, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
     get_object_or_404(Opcao, pk=opcao_id).delete()

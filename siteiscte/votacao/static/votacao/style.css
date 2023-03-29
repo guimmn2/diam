@@ -2,12 +2,12 @@ body {
     text-align: center;
 }
 
-nav ul{
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: midnightblue;
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: midnightblue;
 }
 
 nav li {
@@ -15,29 +15,29 @@ nav li {
 }
 
 nav li a {
-  float: left;
-  font-family: arial, helvetica, sans-serif;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+    float: left;
+    font-family: arial, helvetica, sans-serif;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
 }
 
 nav li a:hover {
-  background-color: #111;
+    background-color: #111;
 }
 
 aside {
-  width: 40%;
-  float: right;
-  padding: 5px;
-  margin: 10px;
+    width: 40%;
+    float: right;
+    padding: 5px;
+    margin: 10px;
 }
 
 p {
-	font-size: 20px;
-	padding: 15px;
+    font-size: 20px;
+    padding: 15px;
 }
 
 form {
@@ -46,43 +46,43 @@ form {
 }
 
 table {
-	width: 100%;
-	border: 1px solid;
-	text-align: center;
-	padding: 15px;
+    width: 100%;
+    border: 1px solid;
+    text-align: center;
+    padding: 15px;
 
 }
 
 th {
-	font-size: 35px;
-	color: midnightblue;
-	padding-bottom: 15px;
+    font-size: 35px;
+    color: midnightblue;
+    padding-bottom: 15px;
 }
 
 td {
-	font-size: 20px;
-	padding-bottom: 10px;
+    font-size: 20px;
+    padding-bottom: 10px;
 }
 
 .title {
-	color: midnightblue;
-	text-align: left;
-	font-size: 75px;
+    color: midnightblue;
+    text-align: left;
+    font-size: 75px;
 }
 
-section a:link,section a:visited {
-  background-color: white;
-  color: black;
-  border: 2px solid midnightblue;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+section a:link, section a:visited {
+    background-color: white;
+    color: black;
+    border: 2px solid midnightblue;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
 }
 
-section a:hover,section a:active {
-  background-color: midnightblue;
-  color: white;
+section a:hover, section a:active {
+    background-color: midnightblue;
+    color: white;
 }
 
 aside {
@@ -110,60 +110,68 @@ aside a {
     display: block;
 }
 
-aside a:hover{
+aside a:hover {
     background-color: #111
 }
 
 
 input[type=text], select, textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 input[type=date], input[type=date], input[type=email], input[type=tel], input[type=number] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 input[type="color"] {
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  background: none;
-  border: 0;
-  cursor: pointer;
-  height: 2em;
-  padding: 0;
-  width: 10em;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    height: 2em;
+    padding: 0;
+    width: 10em;
 }
 
-input[type=submit]{
-  width: 100%;
-  background-color: midnightblue;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.avatar {
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 5px;
+    width: 100px;
+    height: 100px
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: midnightblue;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 input[type=submit]:hover {
-  background-color: #111;
+    background-color: #111;
 }
 
-footer{
-    width:100%;
+footer {
+    width: 100%;
     background-color: #eee;
 }
 

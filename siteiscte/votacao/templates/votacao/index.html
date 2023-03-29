@@ -9,7 +9,7 @@
 <header>
     {% block header %}
         {% if request.user.is_authenticated %}
-            <img src="{{ request.user.aluno.avatar }}">
+            <img class="avatar" src="{{ request.user.aluno.avatar }}">
             <strong>Bem-vindo: &nbsp; {{ user.get_username }} </strong>
         {% endif %}
         <img src="{% static 'votacao/images/iscte.png' %}" width="500" height="200" alt="Banner image">
