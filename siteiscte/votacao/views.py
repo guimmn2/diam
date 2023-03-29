@@ -137,8 +137,10 @@ def info_pessoal(request):
     u = Aluno.objects.get(user_id=request.user.id)
     curso = u.curso
     votos = u.votos
+    avatar = u.avatar
     return render(request, 'votacao/info_pessoal.html', {'username': username, 'email': email,
-                                                         'data': data, 'curso': curso, 'votos': votos})
+                                                         'data': data, 'curso': curso, 'votos': votos,
+                                                         'avatar': avatar})
 
 
 def fazer_upload(request):
@@ -157,5 +159,6 @@ def fazer_upload(request):
         u.save()
         return render(request, 'votacao/info_pessoal.html', {'uploaded_file_url': uploaded_file_url,
                                                              'username': username, 'email': email,
-                                                             'data': data, 'curso': curso, 'votos': votos})
+                                                             'data': data, 'curso': curso, 'votos': votos,
+                                                             'avatar': u.avatar})
     return render(request, 'votacao/info_pessoal.html')

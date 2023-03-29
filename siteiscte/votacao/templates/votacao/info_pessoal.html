@@ -7,7 +7,7 @@
     <form method="post" enctype="multipart/form-data" action="{% url 'votacao:fazer_upload' %}">
         {% csrf_token %}
         <p><strong>Avatar: </strong></p>
-        <img class="avatar" src="{{ request.user.aluno.avatar }}"><br><br>
+        <img class="avatar" src="{{ avatar }}"><br><br>
         <input type="file" name="myfile" required="true">
         <input type="submit" value="Upload">
     </form>
