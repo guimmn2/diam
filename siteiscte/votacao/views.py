@@ -145,6 +145,15 @@ def fazer_upload(request):
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = fs.url(filename)
-        request.user.aluno.avatar = uploaded_file_url
-        return render(request, 'votacao/info_pessoal.html', {'uploaded_file_url': uploaded_file_url})
+        username = request.user.username
+        email = request.user.email
+        data = request.user.date_joined
+        u = Aluno.objects.get(user_id=request.user.id)
+        curso = u.curso
+        votos = u.votos
+        u.avatar = uploaded_file_url
+        u.save()
+        return render(request, 'votacao/info_pessoal.html', {'uploaded_file_url': uploaded_file_url,
+                                                             'username': username, 'email': email,
+                                                             'data': data, 'curso': curso, 'votos': votos})
     return render(request, 'votacao/info_pessoal.html')

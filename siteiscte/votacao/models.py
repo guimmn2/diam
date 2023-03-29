@@ -28,7 +28,7 @@ class Aluno(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     curso = models.CharField(max_length=100)
     votos = models.IntegerField(default=0)
-    avatar = models.ImageField()
+    avatar = models.ImageField(default="static/media/user.png")
 
 
 
