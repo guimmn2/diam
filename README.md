@@ -26,7 +26,7 @@ O relatório deverá conter no máximo 3 páginas A4, formato PDF e ser incluíd
 O ficheiro comprimido ZIP tem que conter o software completo (toda a pasta do projeto), incluindo sources, ambiente virtual e base de
 dados, e um relatório sintético. O ficheiro comprimido não deverá ultrapassar os 150Mb.
 
-O relatório deverá incluir:
+###O relatório deverá incluir:
 
 - descrição do tema do site web, as suas principais funcionalidades (as gerais e as associadas a cada tipo de utilizador)
 - os modelos de dados desenvolvidos e suas relações
