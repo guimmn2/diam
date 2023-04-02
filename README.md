@@ -19,22 +19,18 @@ considere importantes e não deve exceder duas páginas A4.
 
 ## Segunda entrega - Até dia 13 de Maio 23:59
 
-Formato: Grupo-XX-Projeto-DIAM.ZIP
-
 A utilização de scripts externos, templates HTML/CSS, ou outros recursos não programados pelo
 grupo, deverá ser objeto de justificação no relatório, incluindo a indicação dos URLs de onde
 foi feito o download dos recursos (obrigatóriamente gratuitos)
-O relatório deverá conter no máximo 3 páginas A4, formato PDF e ser incluído no ficheiro comprimido a ser entregue. 
+O relatório deverá conter no máximo 3 páginas A4, formato PDF e ser incluído no ficheiro ZIP "Grupo-XX-Projeto-DIAM.ZIP" a ser entregue.
+O ficheiro comprimido ZIP tem que conter o software completo (toda a pasta do projeto), incluindo sources, ambiente virtual e base de
+dados, e um relatório sintético. O ficheiro comprimido não deverá ultrapassar os 150Mb.
 
 O relatório deverá incluir:
 
 - descrição do tema do site web, as suas principais funcionalidades (as gerais e as associadas a cada tipo de utilizador)
 - os modelos de dados desenvolvidos e suas relações
 - descrição de pontos fortes e inovadores do projeto, incluindo aspetos relevantes do código.
-
-O projeto de avaliação deverá ser entregue na forma de um ficheiro comprimido ZIP com o
-software completo (toda a pasta do projeto), incluindo sources, ambiente virtual e base de
-dados, e um relatório sintético. O ficheiro comprimido não deverá ultrapassar os 150Mb.
 
 ### Pontos fortes:
 
