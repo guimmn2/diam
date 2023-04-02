@@ -8,6 +8,6 @@
         <li>{{ opcao.opcao_texto }} {{ opcao.votos }} voto{{ opcao.votos|pluralize }}</li>
 {% endfor %}
 </ul>
-    <a href="{% url 'votacao:detalhe' questao.id %}">Votar novamente?</a>
+    <a href="{% url 'votacao:detalhe' questao.id %}"><button type="button">Votar novamente</button></a>
 
 {% endblock %}

@@ -130,6 +130,7 @@ def logoutview(request):
     return HttpResponseRedirect(reverse('votacao:index'))
 
 
+@login_required(login_url=reverse_lazy('votacao:login'))
 def info_pessoal(request):
     username = request.user.username
     email = request.user.email
@@ -143,6 +144,7 @@ def info_pessoal(request):
                                                          'avatar': avatar})
 
 
+@login_required(login_url=reverse_lazy('votacao:login'))
 def fazer_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']

@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'votacao/style.css' %}">
+    <title>Site ISCTE</title>
 </head>
 <body>
 <header>
     {% block header %}
         {% if request.user.is_authenticated %}
             {% if not request.user.is_superuser %}
-                <img class="avatar" src="{{ request.user.aluno.avatar }}">
-            {% else %}
-                <img src="{% static 'votacao/images/giga.png' %}" width="200" height="200">
+                <img class="avatar" src="{{ request.user.aluno.avatar }}" alt="avatar">
             {% endif %}
             <strong>Bem-vindo: &nbsp; {{ user.get_username }} </strong>
         {% endif %}
