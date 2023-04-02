@@ -17,7 +17,7 @@ esboço dos modelos de dados necessários, os tipos distintos de utilizadores, a
 funcionalidades (as gerais, e as associadas a cada tipo de utilizador), e outros detalhes que
 considere importantes e não deve exceder duas páginas A4.
 
-## Segunda entrega - Até dia 13 de Março 23:59
+## Segunda entrega - Até dia 13 de Maio 23:59
 
 Formato: Grupo-XX-Projeto-DIAM.ZIP
 
