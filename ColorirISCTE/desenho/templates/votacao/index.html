@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'votacao/style.css' %}">
+    <title>Site ISCTE</title>
+</head>
+<body>
+<header>
+    {% block header %}
+        {% if request.user.is_authenticated %}
+            {% if not request.user.is_superuser %}
+                <img class="avatar" src="{{ request.user.aluno.avatar }}" alt="avatar">
+            {% endif %}
+            <strong>Bem-vindo: &nbsp; {{ user.get_username }} </strong>
+        {% endif %}
+        <img src="{% static 'votacao/images/iscte.png' %}" width="500" height="200" alt="Banner image">
+        <nav>
+            <ul>
+                <li><a href="{% url 'votacao:index' %}">Página Inicial</a></li>
+                {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'votacao:logout' %}">Logout</a></li>
+                    {% if not request.user.is_superuser %}
+                        <li><a href="{% url 'votacao:info_pessoal' %}">Informação Pessoal </a></li>
+                    {% endif %}
+                {% else %}
+                    <li><a href="{% url 'votacao:login' %}">Login</a></li>
+                    <li><a href="{% url 'votacao:registar' %}">Registar</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        </header>
+    {% endblock %}
+<main>
+    {% block conteudo %}
+        <h1 style="text-align: center"> Questões</h1>
+        {% if latest_question_list %}
+            <ul  style=" text-align: center;list-style: none;">
+                {% for questao in latest_question_list %}
+                    <li>
+                        <a href="{% url 'votacao:detalhe' questao.id %}">{{ questao.questao_texto }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nao ha questoes disponiveis.</p>
+        {% endif %}
+        <br>
+        {% if request.user.is_superuser %}
+            <a href="{% url 'votacao:criarquestao' %}">
+                <button type="button">Criar Questão</button>
+            </a>
+        {% endif %}
+    {% endblock %}
+</main>
+</body>
+
+</html>
+
+
+
+
+
+

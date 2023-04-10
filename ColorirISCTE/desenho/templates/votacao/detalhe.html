@@ -1,0 +1,32 @@
+{% extends "./index.html" %}
+
+{% block conteudo %}
+<h1>{{ questao.questao_texto }}</h1>
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="{% url 'votacao:voto' questao.id %}" method="post">
+    {% csrf_token %}
+    {% for opcao in questao.opcao_set.all %}
+        <input type="radio" name="opcao" id="opcao{{ forloop.counter }}" value="{{ opcao.id }}"/>
+        <label for="opcao{{ forloop.counter }}">{{ opcao.opcao_texto }}</label>
+        {% if request.user.is_superuser %}
+            <a href="{% url 'votacao:remover_opcao'  opcao.id questao.id %}">
+                <button type="button" style="background-color: red;padding: 2px 2px">X</button>
+                <br> </a>
+        {% endif %}
+        <br/>
+    {% endfor %}
+    <input type="submit" value="Votar"/>
+</form>
+<br>
+{% if request.user.is_superuser %}
+    <a href="{% url 'votacao:criaropcao'  questao.id %}">
+        <button type="button">Criar Opção</button>
+    </a><br><br>
+    <a href="{% url 'votacao:remover_questao'  questao.id %}">
+        <button type="button" style="background-color: red">Remover Questão</button>
+    </a><br><br>
+{% endif %}
+{% endblock %}
