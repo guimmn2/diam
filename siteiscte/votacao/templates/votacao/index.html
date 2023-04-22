@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'votacao/style.css' %}">
     <title>Site ISCTE</title>
     <script>
+
         function validateComment() {
             const comment = document.getElementById('comment').value.toLowerCase();
             hateSpeechOMEGALUL = [
@@ -21,7 +22,7 @@
                 } else {
                     const message = document.createElement("p");
                     message.value = 'Comentário amigável, parabéns :)'
-                    document.getElementById('comment').parentNode.insertBefore(message, comment.nextSibling)
+                    insertAfter(comment, message);
                 }
             }
         }
