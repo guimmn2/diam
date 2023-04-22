@@ -1,65 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'votacao/style.css' %}">
     <title>Site ISCTE</title>
+    <script>
+        function validateComment() {
+            const comment = document.getElementById('comment').value.toLowerCase();
+            hateSpeechOMEGALUL = [
+                'badoncas',
+                'abécula',
+                'mal-cheiroso',
+            ]
+            for (let i = 0; i < hateSpeechOMEGALUL.length; i++) {
+                const word = hateSpeechOMEGALUL[i].toLowerCase();
+                if (comment.includes(word)) {
+                    document.getElementById('comment').value = '';
+                } else {
+                    const message = document.createElement("p");
+                    message.value = 'Comentário amigável, parabéns :)'
+                    document.getElementById('comment').parentNode.insertBefore(message, comment.nextSibling)
+                }
+            }
+        }
+
+        function begoneProfilePicture() {
+            document.getElementById('profilePicture').style.display = "none";
+        }
+
+        function welcomeBackProfilePicture() {
+            document.getElementById('profilePicture').style.display = "inline";
+        }
+
+        function toggleQuestionList() {
+            const listNode = document.getElementById('questionList');
+            const buttonNode = document.getElementById('toggleButton');
+
+            if (listNode.style.display === "") {
+                listNode.style.display = "none";
+                buttonNode.textContent = "Mostrar Lista de Questões";
+            } else {
+                listNode.style.display = "";
+                buttonNode.textContent = "Esconder Lista de Questões";
+            }
+        }
+    </script>
 </head>
+
 <body>
-<header>
-    {% block header %}
+    <header>
+        {% block header %}
         {% if request.user.is_authenticated %}
-            {% if not request.user.is_superuser %}
-                <img class="avatar" src="{{ request.user.aluno.avatar }}" alt="avatar">
-            {% endif %}
-            <strong>Bem-vindo: &nbsp; {{ user.get_username }} </strong>
+        {% if not request.user.is_superuser %}
+        <img class="avatar" id="profilePicture" src="{{ request.user.aluno.avatar }}" alt="avatar"
+            ondblclick="begoneProfilePicture()">
+        {% endif %}
+        <strong ondblclick="welcomeBackProfilePicture()">Bem-vindo: &nbsp; {{ user.get_username }} </strong>
         {% endif %}
         <img src="{% static 'votacao/images/iscte.png' %}" width="500" height="200" alt="Banner image">
         <nav>
             <ul>
                 <li><a href="{% url 'votacao:index' %}">Página Inicial</a></li>
                 {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'votacao:logout' %}">Logout</a></li>
-                    {% if not request.user.is_superuser %}
-                        <li><a href="{% url 'votacao:info_pessoal' %}">Informação Pessoal </a></li>
-                    {% endif %}
+                <li><a href="{% url 'votacao:logout' %}">Logout</a></li>
+                {% if not request.user.is_superuser %}
+                <li><a href="{% url 'votacao:info_pessoal' %}">Informação Pessoal </a></li>
+                {% endif %}
                 {% else %}
-                    <li><a href="{% url 'votacao:login' %}">Login</a></li>
-                    <li><a href="{% url 'votacao:registar' %}">Registar</a></li>
+                <li><a href="{% url 'votacao:login' %}">Login</a></li>
+                <li><a href="{% url 'votacao:registar' %}">Registar</a></li>
                 {% endif %}
             </ul>
         </nav>
-        </header>
+    </header>
     {% endblock %}
-<main>
-    {% block conteudo %}
+    <main>
+        {% block conteudo %}
         <h1 style="text-align: center"> Questões</h1>
+        <button id="toggleButton" onclick="toggleQuestionList()">Mostrar Lista de Questões</button>
         {% if latest_question_list %}
-            <ul  style=" text-align: center;list-style: none;">
-                {% for questao in latest_question_list %}
-                    <li>
-                        <a href="{% url 'votacao:detalhe' questao.id %}">{{ questao.questao_texto }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
+        <ul style=" text-align: center;list-style: none; display: none;" id="questionList">
+            {% for questao in latest_question_list %}
+            <li>
+                <a href="{% url 'votacao:detalhe' questao.id %}">{{ questao.questao_texto }}</a>
+            </li>
+            {% endfor %}
+        </ul>
         {% else %}
-            <p>Nao ha questoes disponiveis.</p>
+        <p>Nao ha questoes disponiveis.</p>
         {% endif %}
         <br>
         {% if request.user.is_superuser %}
-            <a href="{% url 'votacao:criarquestao' %}">
-                <button type="button">Criar Questão</button>
-            </a>
+        <a href="{% url 'votacao:criarquestao' %}">
+            <button type="button">Criar Questão</button>
+        </a>
         {% endif %}
-    {% endblock %}
-</main>
+        {% endblock %}
+    </main>
 </body>
 
 </html>
-
-
-
-
-
-
