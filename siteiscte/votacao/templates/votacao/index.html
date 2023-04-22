@@ -7,6 +7,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'votacao/style.css' %}">
     <title>Site ISCTE</title>
     <script>
+        function insertAfter(referenceNode, newNode) {
+            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+        }
 
         function validateComment() {
             const comment = document.getElementById('comment').value.toLowerCase();
@@ -15,16 +18,24 @@
                 'abécula',
                 'mal-cheiroso',
             ]
+
+            meanWordExists = false;
+
             for (let i = 0; i < hateSpeechOMEGALUL.length; i++) {
                 const word = hateSpeechOMEGALUL[i].toLowerCase();
                 if (comment.includes(word)) {
-                    document.getElementById('comment').value = '';
-                } else {
-                    const message = document.createElement("p");
-                    message.value = 'Comentário amigável, parabéns :)'
-                    insertAfter(comment, message);
-                }
+                    meanWordExists = true;
+                    break;
+                } 
             }
+            if (meanWordExists) {
+                document.getElementById('comment').value = '';
+            } else {
+                var message = document.createElement("p");
+                message.textContent = 'parabéns pela mensagem amigável !!! :)'
+                insertAfter(document.getElementById('comment'), message);
+            }
+
         }
 
         function begoneProfilePicture() {
