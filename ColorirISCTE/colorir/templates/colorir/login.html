@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ColorirISCTE</title>
+</head>
+<body>
+    <form action="{% url 'colorir:login' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Login">
+    </form>
+    <p>Don't have an account? <a href="{% url 'colorir:register' %}">Register </a> </p>
+
+</body>
+</html>
+
