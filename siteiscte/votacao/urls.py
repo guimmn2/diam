@@ -19,4 +19,9 @@ urlpatterns = [
     path('<int:questao_id>, remover_questao', views.remover_questao, name="remover_questao"),
     path('<int:opcao_id>, <int:questao_id>, remover_opcao', views.remover_opcao, name="remover_opcao"),
     path('fazer_upload', views.fazer_upload, name='fazer_upload'),
+    path('api/questoes/', views.questoes_lista),
+    path('api/questoes/<int:pk>', views.questoes_edita),
+    path('api/opcoes/', views.opcoes_lista),
+    path('api/opcoes/<int:pk>', views.opcoes_edita),
+
 ]
